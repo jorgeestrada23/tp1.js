@@ -9,7 +9,7 @@ console.log(bienvenida);
 let lista = ("Lista de alumnos presentes:  ");
 console.log(lista)
 
-// Creamos un array con nombres
+// array con nombres
 let listaDeAsistencia = [
     { nombre: "Ana", presente: false },
     { nombre: "Luis", presente: false },
