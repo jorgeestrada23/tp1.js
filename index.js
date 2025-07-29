@@ -1,68 +1,90 @@
-
-let buscar = alert("Bienvenido a School Family");
-console.log(buscar)
-
-let nombre = prompt("cual es tu nombre");
-let bienvenida = ("Bienvenido " + nombre + " a School Family");
-console.log(bienvenida);
-
-let lista = ("Lista de alumnos presentes:  ");
-console.log(lista)
-
-// array con nombres
-let listaDeAsistencia = [
-    { nombre: "Ana", presente: false },
-    { nombre: "Luis", presente: false },
-    { nombre: "Maria", presente: false },
-    { nombre: "Carlos", presente: false}
+// Alumnos
+const alumnosPorGrado = [
+    {
+        nombre: "javier mendez",
+        notas: [8.5, 9.0, 7.5, 10]
+    },
+    {
+        nombre: "lucia perez",
+        notas: [9.5, 8.0, 9.0, 9.5]
+    },
+    {
+        nombre: "carlos ramirez",
+        notas: [6.0, 7.0, 8.0, 7.0]
+    },
+    {
+        nombre: "jorge ramirez",
+        notas: [6.0, 7.5, 8.0, 7.0]
+    },
+    {
+        nombre: "mariana gonzales",
+        notas: [3.0, 7.5, 8.0, 7.0]
+    },
 ];
 
-// Función para marcar presente por nombre
-function darPresente(nombre) {
-    const persona = listaDeAsistencia.find(p => p.nombre === nombre);
-        if (persona) {
-            persona.presente = true;
-            console.log(`${nombre} está presente.`);
+// desde localStorage
+function obtenerAlumnos() {
+    const datos = localStorage.getItem("alumnosPorGrado");
+    return datos ? JSON.parse(datos) : alumnosPorGrado;
+}
+
+//guardar en localStorage
+function guardarAlumnos(alumnos) {
+    localStorage.setItem("alumnosPorGrado", JSON.stringify(alumnos));
+}
+
+//buscador alumnos
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    const input = document.getElementById("nombreAlumno");
+    const resultadoDiv = document.getElementById("resultado");
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const nombreBuscado = input.value.trim().toLowerCase();
+        const alumnos = obtenerAlumnos();
+
+        const alumno = alumnos.find(a => a.nombre.toLowerCase() === nombreBuscado);
+
+        if (alumno) {
+            const promedio = (
+                alumno.notas.reduce((acc, nota) => acc + nota, 0) / alumno.notas.length
+            ).toFixed(1);
+
+            resultadoDiv.innerHTML = `
+                <h3>${alumno.nombre}</h3>
+                <ul>
+                    ${alumno.notas.map(n => `<li>${n}</li>`).join('')}
+                </ul>
+                <strong>Promedio: ${promedio}</strong>
+            `;
         } else {
-            console.log(`No se encontró a ${nombre} en la lista.`);
+            resultadoDiv.innerHTML = `<p style="color:red;">Alumno no encontrado.</p>`;
         }
-}
+    });
 
-// presente por nombre
-darPresente("Maria");
-darPresente("Ana")
-darPresente("Luis")
-darPresente("Carlos")
-console.log(listaDeAsistencia);
+    btnEliminar.addEventListener('click', () => {
+        resultado.innerHTML = '';
+        inputNombre.value = '';
+    });
+});
 
-let notas = ("Promedio de notas:");
-console.log(notas)
+// Boton Modo Oscuro
+const btnModoOscuro = document.getElementById("btnModoOscuro");
+const body = document.body;
 
-// Array de estudiantes con sus calificaciones
-const estudiantes = [
-    { nombre: 'Ana', notas: [8, 9, 7] },
-    { nombre: 'Luis', notas: [5, 6, 4] },
-    { nombre: 'María', notas: [1, 10, 10] },
-    { nombre: 'Carlos', notas: [3, 4, 2] }
-];
-
-// Función para calcular el promedio de un array de números
-function calcularPromedio(notas) {
-    let suma = 0;
-    for (let i = 0; i < notas.length; i++) {
-        suma += notas[i];
-    }
-    return suma / notas.length;
-}
-
-// Recorremos cada estudiante para mostrar si aprobó o no
-for (let i = 0; i < estudiantes.length; i++) {
-    const estudiante = estudiantes[i];
-    const promedio = calcularPromedio(estudiante.notas);
-
-    if (promedio >= 6) {
-        console.log(`${estudiante.nombre} aprobó con promedio de ${promedio.toFixed(2)}`);
+btnModoOscuro.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+        if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("tema", "dark");
     } else {
-        console.log(`${estudiante.nombre} NO aprobó. Promedio: ${promedio.toFixed(2)}`);
+    localStorage.setItem("tema", "light");
     }
+});
+
+const temaGuardado = localStorage.getItem("tema");
+    if (temaGuardado === "dark") {
+        body.classList.add("dark-mode");
+    } else {
+    body.classList.remove("dark-mode");
 }

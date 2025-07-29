@@ -1,11 +1,60 @@
-*{
+body{
     margin: 0%;
     padding: 0%;
-    background-color: aqua;
-    text-align: center;
+    background-color: rgb(255, 255, 255);
 }
-h1{
+
+#btnModoOscuro{
+    color: rgb(48, 31, 1);
+    border: 2px solid black;
+    margin: 10px;
+    padding: 5px;
+}
+header{
+    border: 2px solid wheat;
     margin: 5vh;
     padding: 10vh;
-    border: 1px solid black;
+    text-align: center;
+}
+main{
+    text-align: center;
+}
+
+ul{
+    list-style: none;
+}
+.contenedor-form{
+    border: 2px solid wheat;
+    margin: 5vh;
+    padding: 5vh;
+}
+button{
+    border-radius: 10px;
+    background-color: rgb(115, 171, 255);
+}
+#btnEliminar{
+    background-color: red;
+    border-radius: 10px;
+}
+footer{
+    text-align: start;
+    margin: 10px;
+}
+
+body.dark-mode {
+    background-color: #3c4349;
+    color: #69b4ff;
+}
+
+body.dark-mode h1, body.dark-mode h2 {
+    color: #92c5f7;
+}
+
+body.dark-mode .contenedor-form {
+    background-color: #3c4349;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode button {
+    background-color: #6bb0fa;
 }

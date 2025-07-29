@@ -8,14 +8,33 @@
     <script src="index.js" defer ></script>
 </head>
 <body>
+    <button id="btnModoOscuro">Cambiar Tema</button>
     <header>
         <h1>School Family</h1>
+        <h2>Somos profesionales</h2>
     </header>
     <main>
 
+        <br>
+        <div class="contenedor-form">
+            <div>
+                <form>
+                    <label>Nombre y Apellido de alumno o alumna:</label>
+                    <br>
+                    <input type="text" id="nombreAlumno" name="nombre"
+                    placeholder="Ej: pablo pintos">
+                    <br>      
+                    <button type="submit">Buscar</button>
+                </form>
+                <h3>Notas:</h3>
+                <div id="resultado"></div>
+                <button id="btnEliminar">Eliminar</button>
+            </div>
+        </div>
     </main>
+    <br>
     <footer>
-
+        <p> &copy; Derechos Reservados by Jorge Estrada</p>
     </footer>
 </body>
 </html>
